@@ -1,2 +1,11 @@
 .idea/
 __pycache__/
+build/
+dist/geckodriver.log
+dist/cookies.pkl
+dist/config.json
+Autoticket.spec
+README.md
+config.json
+cookies.pkl
+geckodriver.log

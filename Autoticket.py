@@ -1,4 +1,5 @@
 # coding: utf-8
+import os
 from json import loads
 from time import sleep, time
 from pickle import dump, load
@@ -157,33 +158,16 @@ class Concert(object):
                 continue
 
             elif buybutton_text == "立即预订":
-                if con.is_element_exist('.citys'):
-                    for i in range(self.ticket_num - 1):  # 设置增加票数
-                        self.driver.find_element_by_xpath(
-                            '/html/body/div[2]/div/div[1]/div[1]/div/div[2]/div[3]/div[8]/div[2]/div/div/a[2]').click()
-                    buybutton.click()
-                    self.status = 3
-                else:
-                    for i in range(self.ticket_num - 1):  # 设置增加票数
-                        self.driver.find_element_by_xpath(
-                            '/html/body/div[2]/div/div[1]/div[1]/div/div[2]/div[3]/div[7]/div[2]/div/div/a[2]').click()
-                    buybutton.click()
-                    self.status = 3
+                for i in range(self.ticket_num - 1):  # 设置增加票数
+                    self.driver.find_element_by_class_name('cafe-c-input-number-handler-up').click()
 
+                buybutton.click()
+                self.status = 3
             elif buybutton_text == "立即购买":
-                if con.is_element_exist('.citys'):
-                    for i in range(self.ticket_num - 1):  # 设置增加票数
-                        self.driver.find_element_by_xpath(
-                            '/html/body/div[2]/div/div[1]/div[1]/div/div[2]/div[3]/div[8]/div[2]/div/div/a[2]').click()
-                    buybutton.click()
-                    self.status = 4
-                else:
-                    for i in range(self.ticket_num - 1):  # 设置增加票数
-                        self.driver.find_element_by_xpath(
-                            '/html/body/div[2]/div/div[1]/div[1]/div/div[2]/div[3]/div[7]/div[2]/div/div/a[2]').click()
-                    buybutton.click()
-                    self.status = 4
-
+                for i in range(self.ticket_num - 1):  # 设置增加票数
+                    self.driver.find_element_by_class_name('cafe-c-input-number-handler-up').click()
+                buybutton.click()
+                self.status = 4
             elif buybutton_text == "选座购买":  # 选座购买暂时无法完成自动化
                 buybutton.click()
                 self.status = 5
@@ -198,6 +182,7 @@ class Concert(object):
     判断页面中是否有该元素
     一般用于判断是否有城市选择和实名认证选择
     '''
+
     def is_element_exist(self, css):
         s = self.driver.find_elements_by_css_selector(css_selector=css)
         if len(s) == 0:
@@ -358,3 +343,4 @@ if __name__ == '__main__':
         con.finish()
     except Exception as e:
         print(e)
+    os.system('pause')
